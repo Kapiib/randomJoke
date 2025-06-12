@@ -1,11 +1,23 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
+<!DOCTYPE html>
+<html lang="no">
+    <%- include('partials/head') %>
 <body>
-        <h1>Hello World</h1>
-    
+    <div class="container">
+        <h1>Tilfeldig Vits</h1>
+        
+        <div class="joke-container">
+            <div class="joke-setup" id="joke-setup">
+                <%= joke.setup %>
+            </div>
+            
+            <div class="joke-punchline" id="joke-punchline">
+                <%= joke.punchline %>
+            </div>
+        </div>
+        
+        <button id="new-joke-btn">Ny Vits</button>
+    </div>
+
+    <script src="/js/main.js"></script>
 </body>
 </html>
