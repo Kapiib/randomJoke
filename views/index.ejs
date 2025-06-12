@@ -5,7 +5,7 @@
     <div class="container">
         <h1>Tilfeldig Vits</h1>
         
-        <div class="joke-container">
+        <div class="joke-container" data-joke-id="<%= joke.id %>">
             <div class="joke-setup" id="joke-setup">
                 <%= joke.setup %>
             </div>
@@ -15,7 +15,23 @@
             </div>
         </div>
         
-        <button id="new-joke-btn">Ny Vits</button>
+        <div class="rating-container">
+            <p>Ranger vitsen:</p>
+            <div class="stars" id="stars-container">
+                <span class="star" data-value="1">★</span>
+                <span class="star" data-value="2">★</span>
+                <span class="star" data-value="3">★</span>
+                <span class="star" data-value="4">★</span>
+                <span class="star" data-value="5">★</span>
+            </div>
+            <div id="average-rating" class="average-rating hidden">
+                <p>Gjennomsnittsvurdering: <span id="avg-value">0</span> (<span id="rating-count">0</span> vurderinger)</p>
+            </div>
+        </div>
+        
+        <div class="buttons">
+            <button id="new-joke-btn" disabled>Ny Vits</button>
+        </div>
     </div>
 
     <script src="/js/main.js"></script>

@@ -65,3 +65,52 @@ button {
 button:hover {
     background-color: #0052a3;
 }
+
+/* Add these styles after existing styles */
+
+.rating-container {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.stars {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.star {
+    font-size: 2rem;
+    cursor: pointer;
+    color: #5a4f4f;
+    transition: color 0.2s;
+}
+
+.star:hover,
+.star.active {
+    color: #ffd700;
+}
+
+button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.average-rating {
+    margin-top: 1rem;
+    font-size: 1rem;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+.buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
