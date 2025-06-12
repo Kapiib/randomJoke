@@ -16,7 +16,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
-// Add trust proxy for proper IP detection
 app.set('trust proxy', 1);
 
 connectDB();
