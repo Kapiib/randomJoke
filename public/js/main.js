@@ -4,12 +4,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const newJokeBtn = document.getElementById('new-joke-btn');
     const stars = document.querySelectorAll('.star');
     const averageRatingDiv = document.getElementById('average-rating');
+    const ratingConfirmation = document.getElementById('rating-confirmation');
     const avgValueSpan = document.getElementById('avg-value');
     const ratingCountSpan = document.getElementById('rating-count');
+    const errorContainer = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+    const errorAction = document.getElementById('error-action');
     
     let currentJokeId = null;
     let currentRating = 0;
     let hasVoted = false;
+    
+    // Function to show error messages
+    const showError = (message, action = '') => {
+        errorText.textContent = message;
+        errorAction.textContent = action;
+        errorContainer.style.display = 'block';
+        
+        // Auto-hide error after 10 seconds
+        setTimeout(() => {
+            errorContainer.style.display = 'none';
+        }, 10000);
+    };
+    
+    // Function to hide error message
+    const hideError = () => {
+        errorContainer.style.display = 'none';
+    };
     
     // Function to reset stars and rating UI
     const resetStars = () => {
@@ -18,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         newJokeBtn.disabled = true;
         hasVoted = false;
         averageRatingDiv.classList.add('hidden');
+        ratingConfirmation.classList.add('hidden');
     };
     
     // Handle star rating selection and immediate submission
@@ -38,13 +60,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             
+            // Hide any previous errors
+            hideError();
+            
             // Submit rating immediately
             const success = await submitRating(currentJokeId, value);
             
             if (success) {
+                // Show confirmation message
+                ratingConfirmation.classList.remove('hidden');
+                
                 // Enable the button after rating is submitted
                 newJokeBtn.disabled = false;
-                // Keep button text consistent - no change
             }
         });
     });
@@ -59,6 +86,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 },
                 body: JSON.stringify({ jokeId, rating })
             });
+            
+            if (response.status === 429) {
+                showError(
+                    'For mange forespørsler. Systemet begrenser antall vurderinger for øyeblikket.', 
+                    'Vennligst vent noen sekunder før du prøver igjen.'
+                );
+                return false;
+            }
             
             if (!response.ok) {
                 throw new Error('Kunne ikke lagre vurdering');
@@ -78,6 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
             return true;
         } catch (error) {
             console.error('Feil ved lagring av vurdering:', error);
+            showError(
+                'Kunne ikke lagre vurderingen din.', 
+                'Sjekk internettforbindelsen din og prøv igjen.'
+            );
             return false;
         }
     };
@@ -85,7 +124,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch a new joke
     const fetchNewJoke = async () => {
         try {
+            // Hide any previous errors when fetching a new joke
+            hideError();
+            
             const response = await fetch('/api/joke');
+            
+            if (response.status === 429) {
+                showError(
+                    'For mange forespørsler. Systemet begrenser antall vitser for øyeblikket.', 
+                    'Vennligst vent noen sekunder før du prøver igjen.'
+                );
+                return;
+            }
+            
             if (!response.ok) {
                 throw new Error('Nettverksfeil');
             }
@@ -93,17 +144,30 @@ document.addEventListener('DOMContentLoaded', () => {
             const joke = await response.json();
             currentJokeId = joke.id;
             
+            // Check if joke data is valid
+            if (!joke.setup || !joke.punchline) {
+                showError(
+                    'Den hentede vitsen er ikke komplett.',
+                    'Prøv å laste inn en ny vits.'
+                );
+                // Still show whatever we received
+            }
+            
             // Update the joke on the page
-            setupElement.textContent = joke.setup;
-            punchlineElement.textContent = joke.punchline;
+            setupElement.textContent = joke.setup || 'Manglende vits...';
+            punchlineElement.textContent = joke.punchline || 'Manglende punchline...';
             
             // Reset stars for new joke
             resetStars();
             
         } catch (error) {
             console.error('Feil ved henting av vits:', error);
-            setupElement.textContent = 'Kunne ikke hente vitsen';
-            punchlineElement.textContent = 'Prøv igjen senere';
+            showError(
+                'Kunne ikke hente en ny vits.', 
+                'Sjekk internettforbindelsen din og prøv igjen senere.'
+            );
+            setupElement.textContent = 'Nettverksproblemer';
+            punchlineElement.textContent = 'Kunne ikke hente vits fra serveren';
         }
     };
 
@@ -112,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
         fetchNewJoke();
     });
     
-    // Instead, just use the server-provided joke and update the currentJokeId
+    // Use the server-provided joke and update the currentJokeId
     const jokeElement = document.querySelector('.joke-container');
     if (jokeElement) {
         currentJokeId = jokeElement.dataset.jokeId;

@@ -57,8 +57,12 @@ router.post('/api/rate', async (req, res) => {
     try {
         const { jokeId, rating } = req.body;
         
-        if (!jokeId || !rating || rating < 1 || rating > 5) {
-            return res.status(400).json({ error: 'Ugyldig vurdering' });
+        if (!jokeId) {
+            return res.status(400).json({ error: 'Mangler vits-ID' });
+        }
+        
+        if (!rating || rating < 1 || rating > 5) {
+            return res.status(400).json({ error: 'Vurderingen må være mellom 1 og 5 stjerner' });
         }
         
         // Find existing rating document or create new one using findOneAndUpdate
@@ -87,7 +91,20 @@ router.post('/api/rate', async (req, res) => {
         });
     } catch (error) {
         console.error('Error saving rating:', error);
-        res.status(500).json({ error: 'Kunne ikke lagre vurdering' });
+        res.status(500).json({ 
+            error: 'Kunne ikke lagre vurdering', 
+            message: 'Det oppstod en feil ved lagring av din vurdering. Prøv igjen senere.' 
+        });
+    }
+});
+
+// Add this route before module.exports
+router.get('/brukerveiledning', (req, res) => {
+    try {
+        res.render('guide');
+    } catch (error) {
+        console.error('Error rendering user guide:', error);
+        res.status(500).send('Kunne ikke laste brukerveiledningen');
     }
 });
 

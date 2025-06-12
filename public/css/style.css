@@ -114,3 +114,182 @@ button:disabled {
     justify-content: center;
     gap: 1rem;
 }
+
+/* Add error message styling */
+.error-container {
+    background-color: #ffeeee;
+    border-left: 4px solid #ff5555;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    color: #333;
+    text-align: left;
+}
+
+.error-container p {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.error-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #cc0000;
+}
+
+.error-action {
+    margin-top: 0.5rem;
+    font-style: italic;
+}
+
+/* User Guide Styles */
+.guide-container {
+    text-align: left;
+    max-width: 800px;
+}
+
+.guide-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.guide-section h2 {
+    color: #0066cc;
+    margin-bottom: 1rem;
+}
+
+.guide-step {
+    margin-bottom: 1.5rem;
+}
+
+.guide-step h3 {
+    color: #333;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.guide-step ul, .guide-step ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.guide-step li {
+    margin-bottom: 0.5rem;
+}
+
+.example-box {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.example-setup {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.example-punchline {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #0066cc;
+}
+
+.stars-example {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin: 0.5rem 0;
+}
+
+.button-example {
+    background-color: #0066cc;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.guide-note {
+    background-color: #fffbef;
+    border-left: 4px solid #ffcc00;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+}
+
+.guide-note h3 {
+    color: #664d00;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.error-example {
+    background-color: #ffeeee;
+    border-left: 4px solid #ff5555;
+    padding: 1rem;
+    margin: 1rem 0;
+    border-radius: 4px;
+    color: #333;
+}
+
+.guide-footer {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: #0066cc;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #0052a3;
+}
+
+/* Add this to your CSS file */
+.guide-link {
+    margin-top: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.guide-link a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.guide-link a:hover {
+    text-decoration: underline;
+}
+
+/* Add this to your CSS file */
+.rating-confirmation {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #e6f7e6;
+    border-radius: 5px;
+    color: #2e7d32;
+    font-weight: bold;
+    animation: fadeIn 0.5s;
+}
+
+.rating-confirmation p {
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}

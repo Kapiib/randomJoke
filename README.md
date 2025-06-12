@@ -108,4 +108,46 @@ Henter gjennomsnittsvurdering for en bestemt vits.
 
 1. **Rate limiting**
    - Beskrivelse: Begrenser antall API-forespørsler fra samme IP-adresse.
-   - Implementering: Express Rate Limit middleware med 5 forespørsel
+   - Implementering: Express Rate Limit middleware med 5 forespørsel per 10 sekunder.
+   - Formål: Forhindrer DoS-angrep og begrenser automatisert misbruk av API-et.
+
+2. **Input validering**
+   - Beskrivelse: Validerer alle brukerinput før de lagres i databasen.
+   - Implementering: Server-side validering av jokeId og rating (1-5).
+   - Formål: Forhindrer injeksjonsangrep og sikrer dataintegritet.
+
+3. **Strukturert feilhåndtering**
+   - Beskrivelse: Håndterer feil på en konsistent og sikker måte.
+   - Implementering: Try-catch blokker med spesifikke feilmeldinger.
+   - Formål: Forhindrer lekkasje av sensitiv informasjon gjennom feilmeldinger.
+
+### Potensielle angrepstyper
+
+1. **Denial of Service (DoS) angrep**
+   - Beskrivelse: Overbelastning av serveren med mange forespørsler for å gjøre tjenesten utilgjengelig.
+   - Mulig konsekvens: Serveren blir treg eller utilgjengelig for legitime brukere.
+   - Beskyttelsestiltak: Rate limiting implementert for å begrense antall forespørsler fra samme IP.
+
+2. **Injection-angrep**
+   - Beskrivelse: Forsøk på å manipulere database-spørringer gjennom brukerinput.
+   - Mulig konsekvens: Uautorisert tilgang til eller manipulering av databasen.
+   - Beskyttelsestiltak: Input validering og bruk av Mongoose (ODM) som saniterer input.
+
+3. **Cross-Site Scripting (XSS)**
+   - Beskrivelse: Injisering av skadelig JavaScript på nettsiden.
+   - Mulig konsekvens: Tyveri av brukerdata eller manipulering av nettsiden.
+   - Beskyttelsestiltak: EJS templating rømmer automatisk HTML-tegn i output.
+
+### Tiltak for å redusere risiko for sikkerhetsbrudd
+
+1. **Segregert nettverksarkitektur**
+   - Beskrivelse: Databasen er plassert i et lukket nettverk som kun er tilgjengelig fra backend-serveren.
+   - Implementering: Firewall-regler og nettverk-segmentering.
+
+2. **Ingen sensitive brukerdata**
+   - Beskrivelse: Applikasjonen lagrer ikke personidentifiserbare opplysninger.
+   - Implementering: Kun aggregerte data om vurderinger lagres.
+
+3. **Regelmessige oppdateringer**
+   - Beskrivelse: Holde alle avhengigheter og programvare oppdatert.
+   - Implementering: Automatiserte GitHub workflows sjekker for sårbarheter.

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="no">
+    <%- include('partials/head') %>
+<body>
+    <div class="container guide-container">
+        <h1>Brukerveiledning: Tilfeldig Vits-applikasjon</h1>
+        
+        <div class="guide-section">
+            <h2>Introduksjon</h2>
+            <p>Denne applikasjonen lar deg lese tilfeldige vitser og gi dem en vurdering fra 1 til 5 stjerner. Du kan også se gjennomsnittsvurderingen for hver vits basert på alle brukeres stemmer.</p>
+        </div>
+        
+        <div class="guide-section">
+            <h2>Slik bruker du applikasjonen</h2>
+            
+            <div class="guide-step">
+                <h3>1. Lese vitsen</h3>
+                <p>Hver vits består av to deler:</p>
+                <ul>
+                    <li><strong>Oppsett (setup):</strong> Den første delen av vitsen</li>
+                    <li><strong>Punchline:</strong> Avslutningen som gir vitsen sin humor</li>
+                </ul>
+                <div class="example-box">
+                    <p class="example-setup">Hvorfor gikk kyllingen over veien?</p>
+                    <p class="example-punchline">For å komme til den andre siden!</p>
+                </div>
+            </div>
+            
+            <div class="guide-step">
+                <h3>2. Vurdere vitsen</h3>
+                <p>Under vitsen finner du et stjernegrensesnitt med 5 stjerner:</p>
+                <ol>
+                    <li>Klikk på antall stjerner du vil gi vitsen (1 stjerne = Dårlig, 5 stjerner = Utmerket)</li>
+                    <li>Stjernen og alle stjerner til venstre for den vil bli gule</li>
+                    <li>Din vurdering blir umiddelbart lagret</li>
+                    <li>Gjennomsnittsvurderingen vil vises under stjernene</li>
+                </ol>
+                <div class="example-box">
+                    <div class="stars-example">
+                        <span class="star active">★</span>
+                        <span class="star active">★</span>
+                        <span class="star active">★</span>
+                        <span class="star">★</span>
+                        <span class="star">★</span>
+                    </div>
+                    <p><small>Eksempel: 3 av 5 stjerner</small></p>
+                </div>
+            </div>
+            
+            <div class="guide-step">
+                <h3>3. Se en ny vits</h3>
+                <ol>
+                    <li>Etter at du har vurdert en vits, vil knappen "Ny Vits" bli aktivert</li>
+                    <li>Klikk på "Ny Vits"-knappen for å laste inn en ny tilfeldig vits</li>
+                    <li>Den nye vitsen vil erstatte den nåværende på skjermen</li>
+                </ol>
+                <div class="example-box">
+                    <button class="button-example">Ny Vits</button>
+                </div>
+            </div>
+            
+            <div class="guide-step">
+                <h3>4. Forstå gjennomsnittsvurderingen</h3>
+                <p>Når du har vurdert en vits, vises følgende informasjon:</p>
+                <ul>
+                    <li><strong>Gjennomsnittsvurdering:</strong> Gjennomsnittlig antall stjerner vitsen har fått</li>
+                    <li><strong>Antall vurderinger:</strong> Hvor mange brukere som har vurdert denne spesifikke vitsen</li>
+                </ul>
+                <div class="example-box">
+                    <p>Gjennomsnittsvurdering: <strong>4.2</strong> (5 vurderinger)</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>Viktig å vite</h2>
+            
+            <div class="guide-note">
+                <h3>Du kan bare vurdere hver vits én gang</h3>
+                <p>Når du har gitt en vurdering, kan du ikke endre den. Stjernene forblir gule for å vise din valgte vurdering.</p>
+            </div>
+            
+            <div class="guide-note">
+                <h3>Rate limiting</h3>
+                <p>For å hindre overbelastning er det begrenset hvor mange forespørsler du kan gjøre til serveren. Hvis du ser en feilmelding om "For mange forespørsler", vent noen sekunder før du prøver igjen.</p>
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>Håndtere feilmeldinger</h2>
+            
+            <div class="error-example">
+                <div class="error-title">Feil</div>
+                <p>Nettverksproblemer - kunne ikke hente en ny vits.</p>
+                <p class="error-action">Sjekk internettforbindelsen din og prøv igjen senere.</p>
+            </div>
+            
+            <div class="guide-step">
+                <h3>Vanlige feil og løsninger:</h3>
+                <ul>
+                    <li><strong>Nettverksproblemer:</strong> Sjekk internettforbindelsen din og last siden på nytt</li>
+                    <li><strong>Manglende vits:</strong> Klikk "Ny Vits" for å prøve en annen</li>
+                    <li><strong>Rate limiting:</strong> Vent noen sekunder før du prøver igjen</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="guide-section">
+            <h2>Tips</h2>
+            <ul>
+                <li>De beste vitsene er ofte de som overrasker deg - vurder ikke bare hvor morsom punchlinen er, men også hvor kreativt oppsettet er</li>
+                <li>Hvis en vits ikke lastes, er det sannsynligvis på grunn av en midlertidig nettverksfeil - prøv igjen om noen sekunder</li>
+            </ul>
+        </div>
+        
+        <div class="guide-footer">
+            <a href="/" class="back-button">Tilbake til vitsene</a>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
