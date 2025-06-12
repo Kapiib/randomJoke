@@ -9,6 +9,7 @@ require('dotenv').config();
 // Import routes
 const connectDB = require('./db/dbConfig');
 const getRoutes = require('./routes/getRoutes');
+const apiRoutes = require('./routes/apiRoutes');
 
 dotenv.config();
 
@@ -30,8 +31,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Routes
+// Rate-limiting middleware
 app.use('/api', apiRateLimiter);
+
+// Routes
+app.use('/api', apiRoutes);
 app.use('/', getRoutes);
 
 // Start server
