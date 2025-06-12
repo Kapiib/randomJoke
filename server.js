@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const path = require('path');
 const cookieParser = require('cookie-parser');
+const apiRateLimiter = require('./middleware/rateLimitMiddleware'); // Import the rate limiter
 require('dotenv').config();
 
 // Import routes
@@ -13,6 +14,9 @@ dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT;
+
+// Add trust proxy for proper IP detection
+app.set('trust proxy', 1);
 
 connectDB();
 
@@ -27,6 +31,7 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // Routes
+app.use('/api', apiRateLimiter);
 app.use('/', getRoutes);
 
 // Start server

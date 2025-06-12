@@ -91,4 +91,10 @@ router.post('/api/rate', async (req, res) => {
     }
 });
 
+// Add this route at the end, before module.exports
+router.get('/api/test-rate-limit', (req, res) => {
+  console.log(`Test rate limit accessed at ${new Date().toISOString()}`);
+  res.json({ success: true, message: 'This route is rate limited', time: new Date().toISOString() });
+});
+
 module.exports = router;

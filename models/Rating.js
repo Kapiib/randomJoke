@@ -16,7 +16,6 @@ const ratingSchema = new mongoose.Schema({
     required: true,
     default: 0
   },
-  // Average is calculated when needed, not stored
 }, { 
     timestamps: true // both the createdAt and updatedAt
 });
